@@ -348,12 +348,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  otherFoot: {fileID: 2050503624}
-  friendFoot: {fileID: 983949267}
-  speed: 1
-  stepDistance: 4
-  stepHeight: 0.1
-  footOffset: {x: 1, y: 1, z: 1}
+  stepForce: 0.5
+  stepHeight: 1
+  footOffset: {x: -2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &486901518 stripped
 GameObject:
@@ -439,6 +436,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7865150948434014330, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
   m_PrefabInstance: {fileID: 1976574971}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &486901523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486901518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7fe278b0739d8bfa90c508b14f854b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepSpeed: 5
+  legsGroup:
+  - legs:
+    - {fileID: 2050503624}
+    - {fileID: 1481017151}
+  - legs:
+    - {fileID: 475754565}
+    - {fileID: 983949267}
 --- !u!4 &496683639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7019641302615778445, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
@@ -1234,12 +1251,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  otherFoot: {fileID: 1481017151}
-  friendFoot: {fileID: 475754565}
-  speed: 1
-  stepDistance: 4
-  stepHeight: 0.1
-  footOffset: {x: -1, y: 1, z: -1}
+  stepForce: 0.5
+  stepHeight: 1
+  footOffset: {x: 2, y: 2, z: 2}
   stepState: 1
 --- !u!4 &1000149665 stripped
 Transform:
@@ -1448,12 +1462,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  otherFoot: {fileID: 983949267}
-  friendFoot: {fileID: 2050503624}
-  speed: 1
-  stepDistance: 4
-  stepHeight: 0.1
-  footOffset: {x: 1, y: 1, z: -1}
+  stepForce: 0.5
+  stepHeight: 1
+  footOffset: {x: -2, y: 2, z: 2}
   stepState: 1
 --- !u!1 &1485204784
 GameObject:
@@ -1810,12 +1821,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  otherFoot: {fileID: 475754565}
-  friendFoot: {fileID: 1481017151}
-  speed: 1
-  stepDistance: 4
-  stepHeight: 0.1
-  footOffset: {x: -1, y: 1, z: 1}
+  stepForce: 0.5
+  stepHeight: 1
+  footOffset: {x: 2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &2082662114
 GameObject:

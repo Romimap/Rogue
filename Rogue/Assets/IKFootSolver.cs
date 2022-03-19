@@ -5,23 +5,24 @@ using UnityEngine;
 public class IKFootSolver : MonoBehaviour {
     [SerializeField] private LayerMask terrainLayer = default;
     [SerializeField] private Transform body = default;
-    [SerializeField] private IKFootSolver otherFoot = default;
-    [SerializeField] private IKFootSolver friendFoot = default;
-    [SerializeField] private float speed = 1;
-    [SerializeField] private float stepDistance = 4;
+    [SerializeField] private float stepForce = 0.1f;
     [SerializeField] private float stepHeight = 1;
-    [SerializeField] private float stepSpeed = 5;
+    private float stepSpeed = 5;
     [SerializeField] private Vector3 footOffset = default;
 
     private Vector3 oldPosition, currentPosition, newPosition;
     private Vector3 oldNormal, currentNormal, newNormal;
 
+    private Vector3 prevTargetPos;
+    private Vector3 deltaTargetPos;
+
     public enum StepState {STEPPING, IDLE};
 
     public StepState stepState = StepState.IDLE;
 
-    private void Start() {
-        
+
+    public void Init(float stepSpeed) {
+        this.stepSpeed = stepSpeed;
     }
 
     // Update is called once per frame
@@ -29,16 +30,8 @@ public class IKFootSolver : MonoBehaviour {
         Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * 10, Color.red);
         transform.position = currentPosition;
 
-        if (stepState == StepState.STEPPING) return;
-
-        //Raycast down @ footoffset
-        RaycastHit hit;
-        if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
-            if ((hit.point - currentPosition).magnitude > stepDistance) {
-                Step();
-                Debug.Log("MAG: " + (hit.point - currentPosition).magnitude);
-            }
-        }
+        deltaTargetPos = body.TransformPoint(footOffset) - prevTargetPos;
+        prevTargetPos = body.TransformPoint(footOffset);
     }
 
     IEnumerator StepAnimation () {
@@ -49,9 +42,10 @@ public class IKFootSolver : MonoBehaviour {
         currentPosition = newPosition;
 
         float t = 1;
+        float mult = (newPosition - oldPosition).magnitude / 10;
         while (t > 0) {
             currentPosition = t * oldPosition + (1 - t) * newPosition;
-            currentPosition.y += Mathf.Sin(t * Mathf.PI) * stepHeight;
+            currentPosition.y += Mathf.Sin(t * Mathf.PI) * stepHeight * mult;
             t -= Time.deltaTime * stepSpeed;
             yield return new WaitForEndOfFrame();
         }
@@ -63,13 +57,11 @@ public class IKFootSolver : MonoBehaviour {
     }
 
     public void Step () {
-        if (otherFoot.stepState == StepState.STEPPING) return;
-        if (stepState == StepState.STEPPING) return;
-        
         RaycastHit hit;
         if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
-
-            Vector3 targetPos = hit.point + (stepDistance * 0.9f) * (hit.point - currentPosition).normalized;
+            Vector3 offset = (deltaTargetPos / Time.deltaTime);
+            if (offset.magnitude > 1) offset = offset.normalized;
+            Vector3 targetPos = hit.point + stepForce * offset;
 
             if (Physics.Raycast(targetPos, Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
                 Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * hit.distance, Color.green);
@@ -77,7 +69,6 @@ public class IKFootSolver : MonoBehaviour {
                 newPosition = hit.point;
 
                 StartCoroutine("StepAnimation");
-                friendFoot.Step();
             }
         }
     }
