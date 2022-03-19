@@ -43,6 +43,7 @@ public class IKBody : MonoBehaviour
         meany /= n;
         p.y = meany + bodyHeight;
         transform.position = p;
+        transform.rotation = target.rotation;
 
 
         t -= Time.deltaTime * stepSpeed;
