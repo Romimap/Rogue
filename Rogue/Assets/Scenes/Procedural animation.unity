@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.57482505, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -353,7 +353,8 @@ MonoBehaviour:
   speed: 1
   stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 1, y: 1, z: 1}
+  stepSpeed: 5
+  footOffset: {x: -2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &486901518 stripped
 GameObject:
@@ -1131,13 +1132,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.23840217, y: -0, z: -0, w: 0.97116655}
+  m_LocalPosition: {x: 0, y: 20.4, z: -35.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.585, y: 0, z: 0}
 --- !u!1 &981135124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1240,8 @@ MonoBehaviour:
   speed: 1
   stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: -1, y: 1, z: -1}
+  stepSpeed: 5
+  footOffset: {x: 2, y: 2, z: 2}
   stepState: 1
 --- !u!4 &1000149665 stripped
 Transform:
@@ -1453,7 +1455,8 @@ MonoBehaviour:
   speed: 1
   stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 1, y: 1, z: -1}
+  stepSpeed: 5
+  footOffset: {x: -2, y: 2, z: 2}
   stepState: 1
 --- !u!1 &1485204784
 GameObject:
@@ -1815,7 +1818,8 @@ MonoBehaviour:
   speed: 1
   stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: -1, y: 1, z: 1}
+  stepSpeed: 5
+  footOffset: {x: 2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &2082662114
 GameObject:
