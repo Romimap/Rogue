@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.57482505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -349,11 +349,12 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 486901522}
   otherFoot: {fileID: 2050503624}
+  friendFoot: {fileID: 983949267}
   speed: 1
-  stepDistance: 0.5
-  stepLength: 1
+  stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 0, y: 1, z: 0}
+  footOffset: {x: 1, y: 1, z: 1}
+  stepState: 1
 --- !u!1 &486901518 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7380680370838842048, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
@@ -1234,11 +1235,12 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 486901522}
   otherFoot: {fileID: 1481017151}
+  friendFoot: {fileID: 475754565}
   speed: 1
-  stepDistance: 0.5
-  stepLength: 1
+  stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 0, y: 1, z: 0}
+  footOffset: {x: -1, y: 1, z: -1}
+  stepState: 1
 --- !u!4 &1000149665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8939367003914877496, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
@@ -1447,11 +1449,12 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 486901522}
   otherFoot: {fileID: 983949267}
+  friendFoot: {fileID: 2050503624}
   speed: 1
-  stepDistance: 0.5
-  stepLength: 1
+  stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 0, y: 1, z: 0}
+  footOffset: {x: 1, y: 1, z: -1}
+  stepState: 1
 --- !u!1 &1485204784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,11 +1811,12 @@ MonoBehaviour:
     m_Bits: 1
   body: {fileID: 486901522}
   otherFoot: {fileID: 475754565}
+  friendFoot: {fileID: 1481017151}
   speed: 1
-  stepDistance: 0.5
-  stepLength: 1
+  stepDistance: 4
   stepHeight: 0.1
-  footOffset: {x: 0, y: 1, z: 0}
+  footOffset: {x: -1, y: 1, z: 1}
+  stepState: 1
 --- !u!1 &2082662114
 GameObject:
   m_ObjectHideFlags: 0

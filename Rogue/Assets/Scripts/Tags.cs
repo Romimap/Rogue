@@ -5,11 +5,6 @@ using Unity.Mathematics;
 
 
 namespace Tags {
-    
-    [Serializable]
-    public struct Player : IComponentData {
-    
-        
-        
-    }    
+    public struct Player : IComponentData {}
+    public struct Bird : IComponentData {}
 }
