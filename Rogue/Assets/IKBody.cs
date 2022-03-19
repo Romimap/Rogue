@@ -6,6 +6,9 @@ public class IKBody : MonoBehaviour
 {
 
     [SerializeField] private float stepSpeed = 5;
+    [SerializeField] float stepForce = 0.1f;
+    [SerializeField] float stepLenght = 2f;
+    [SerializeField] float stepHeight = 1f;
 
     [System.Serializable]
     public struct LegList {
@@ -16,11 +19,10 @@ public class IKBody : MonoBehaviour
     // Start is called before the first frame update
     private int currentGroup = 0;
     private float t = 1;
-    void Start()
-    {
+    void Start() {
         foreach(LegList group in legsGroup) {
             foreach(IKFootSolver leg in group.legs) {
-                    leg.Init(stepSpeed);
+                leg.Init(stepSpeed, stepForce, stepLenght, stepHeight);
             }   
         }
     }

@@ -5,8 +5,9 @@ using UnityEngine;
 public class IKFootSolver : MonoBehaviour {
     [SerializeField] private LayerMask terrainLayer = default;
     [SerializeField] private Transform body = default;
-    [SerializeField] private float stepForce = 0.1f;
-    [SerializeField] private float stepHeight = 1;
+    private float stepForce = 0.1f;
+    private float stepLenght = 2;
+    private float stepHeight = 1;
     private float stepSpeed = 5;
     [SerializeField] private Vector3 footOffset = default;
 
@@ -21,8 +22,11 @@ public class IKFootSolver : MonoBehaviour {
     public StepState stepState = StepState.IDLE;
 
 
-    public void Init(float stepSpeed) {
-        this.stepSpeed = stepSpeed;
+    public void Init(float stepSpeed, float stepForce, float stepLenght, float stepHeight) {
+        this.stepSpeed = stepSpeed + 0.1f;
+        this.stepForce = stepForce;
+        this.stepHeight = stepHeight;
+        this.stepLenght = stepLenght;
     }
 
     // Update is called once per frame
@@ -59,9 +63,9 @@ public class IKFootSolver : MonoBehaviour {
     public void Step () {
         RaycastHit hit;
         if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
-            Vector3 offset = (deltaTargetPos / Time.deltaTime);
+            Vector3 offset = (deltaTargetPos / Time.deltaTime) * stepForce;
             if (offset.magnitude > 1) offset = offset.normalized;
-            Vector3 targetPos = hit.point + stepForce * offset;
+            Vector3 targetPos = hit.point + stepLenght * offset;
 
             if (Physics.Raycast(targetPos, Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
                 Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * hit.distance, Color.green);

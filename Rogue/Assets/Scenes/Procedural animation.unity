@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.57482505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,8 +348,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  stepForce: 0.5
-  stepHeight: 1
   footOffset: {x: -2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &486901518 stripped
@@ -449,6 +447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepSpeed: 5
+  stepForce: 0.1
+  stepLenght: 4
+  stepHeight: 1
   legsGroup:
   - legs:
     - {fileID: 2050503624}
@@ -1251,8 +1252,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  stepForce: 0.5
-  stepHeight: 1
   footOffset: {x: 2, y: 2, z: 2}
   stepState: 1
 --- !u!4 &1000149665 stripped
@@ -1462,8 +1461,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  stepForce: 0.5
-  stepHeight: 1
   footOffset: {x: -2, y: 2, z: 2}
   stepState: 1
 --- !u!1 &1485204784
@@ -1821,8 +1818,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   body: {fileID: 486901522}
-  stepForce: 0.5
-  stepHeight: 1
   footOffset: {x: 2, y: 2, z: -2}
   stepState: 1
 --- !u!1 &2082662114
