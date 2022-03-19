@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271385365}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackRightLeg_IK_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475754564}
   - component: {fileID: 475754565}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontRightLeg_IK_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,6 +450,7 @@ MonoBehaviour:
   stepForce: 0.1
   stepLenght: 4
   stepHeight: 1
+  bodyHeight: 1.5
   legsGroup:
   - legs:
     - {fileID: 2050503624}
@@ -472,7 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497823824}
   - component: {fileID: 497823825}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackLeftLeg_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 798568026}
   - component: {fileID: 798568027}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackRightLeg_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 842940743}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeftLeg_IK_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 957971194}
   - component: {fileID: 957971195}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontRightLeg_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981135126}
   - component: {fileID: 981135125}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rig 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1215,7 +1216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 983949266}
   - component: {fileID: 983949267}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackLeftLeg_IK_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1383,7 +1384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1339760484}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackLeftLeg_IK_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1424,7 +1425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1481017150}
   - component: {fileID: 1481017151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BackRightLeg_IK_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1683152977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontRightLeg_IK_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,6 +1706,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 363835747035796987, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 415673626494941935, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 795375843351259822, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 887603931148776023, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098245076984193899, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329890147980466389, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338526332295876168, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426062643361414048, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452557673471586040, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500320761081104766, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231765988153787560, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908828834879998188, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4405545418554871389, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912826735588881006, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258615145495940601, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6285893929518916658, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.00000007572443
@@ -1721,9 +1782,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.001880014
       objectReference: {fileID: 0}
+    - target: {fileID: 6998730077580240373, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7305773610858594927, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7380680370838842048, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
       propertyPath: m_Name
-      value: P_4LegsTest01
+      value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380680370838842048, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7865150948434014330, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
       propertyPath: m_RootOrder
@@ -1769,6 +1842,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8408330742219282448, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099515159873711100, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bffbb854426ac424d84371df8e7f1f0a, type: 3}
 --- !u!1 &2050503622
@@ -1781,7 +1862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2050503623}
   - component: {fileID: 2050503624}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeftLeg_IK_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1830,7 +1911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2082662115}
   - component: {fileID: 2082662116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeftLeg_IK
   m_TagString: Untagged
   m_Icon: {fileID: 0}

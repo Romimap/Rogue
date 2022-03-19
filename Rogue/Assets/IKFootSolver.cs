@@ -29,9 +29,13 @@ public class IKFootSolver : MonoBehaviour {
         this.stepLenght = stepLenght;
     }
 
+    void Start() {
+        footOffset.y += 5;
+    }
+
     // Update is called once per frame
     void Update() {
-        Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * 10, Color.red);
+        Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * 15, Color.red);
         transform.position = currentPosition;
 
         deltaTargetPos = body.TransformPoint(footOffset) - prevTargetPos;
@@ -62,12 +66,12 @@ public class IKFootSolver : MonoBehaviour {
 
     public void Step () {
         RaycastHit hit;
-        if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
+        if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, 15, terrainLayer)) {
             Vector3 offset = (deltaTargetPos / Time.deltaTime) * stepForce;
             if (offset.magnitude > 1) offset = offset.normalized;
             Vector3 targetPos = hit.point + stepLenght * offset;
 
-            if (Physics.Raycast(targetPos, Vector3.down, out hit, Mathf.Infinity, terrainLayer)) {
+            if (Physics.Raycast(targetPos + (Vector3.up * 5), Vector3.down, out hit, 15, terrainLayer)) {
                 Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * hit.distance, Color.green);
                 oldPosition = currentPosition;
                 newPosition = hit.point;

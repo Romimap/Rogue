@@ -9,6 +9,8 @@ public class IKBody : MonoBehaviour
     [SerializeField] float stepForce = 0.1f;
     [SerializeField] float stepLenght = 2f;
     [SerializeField] float stepHeight = 1f;
+    [SerializeField] float bodyHeight = 1.5f;
+    [SerializeField] Transform target;
 
     [System.Serializable]
     public struct LegList {
@@ -28,8 +30,21 @@ public class IKBody : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        Vector3 p = target.position;
+        float meany = 0;
+        float n = 0;
+         foreach(LegList group in legsGroup) {
+            foreach(IKFootSolver leg in group.legs) {
+                meany += leg.transform.position.y;
+                n++;
+            }   
+        }
+        meany /= n;
+        p.y = meany + bodyHeight;
+        transform.position = p;
+
+
         t -= Time.deltaTime * stepSpeed;
 
         if (t < 0) {
