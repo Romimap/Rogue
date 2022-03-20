@@ -21,7 +21,6 @@ public struct BoidEvaluationJob : IJobParallelFor {
         float3 align = new float3();
         float3 target = new float3();
 
-
         float3 avgpos = new float3();
         float n = 0;
         foreach (int resultIndex in result) {
@@ -45,14 +44,12 @@ public struct BoidEvaluationJob : IJobParallelFor {
         target = math.normalizesafe(-data.position);
 
         data.velocity = (
-              math.normalizesafe(data.velocity) * data.velocityFactor
+              math.normalizesafe(data.velocity) * data.velocityFactor //That line is important, this will allow some elasticity on the speed but still tend to a normalized one
             + evade * data.evadeFactor
             + clump * data.clumpFactor
             + align * data.alignFactor
             + target * data.targetFactor) / 
             (data.velocityFactor + data.evadeFactor + data.clumpFactor + data.alignFactor + data.targetFactor);
-
-        //data.velocity = new float3(1, 0, 0);
 
         result.Dispose();
         birdDatas[index] = data;
