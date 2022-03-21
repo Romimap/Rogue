@@ -105,9 +105,9 @@ MonoBehaviour:
       y: 0
       z: 0
     clumpFactor: 0.6
-    evadeFactor: 1
+    evadeFactor: 0.3
     alignFactor: 0.3
-    targetFactor: 0.1
-    velocityFactor: 3
+    targetFactor: 0.2
+    velocityFactor: 1.5
     speed: 3
-    visionRadius: 2
+    visionRadius: 3

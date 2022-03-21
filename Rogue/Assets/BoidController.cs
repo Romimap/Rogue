@@ -5,46 +5,102 @@ using Unity.Mathematics;
 using Unity.Jobs;
 using Unity.Collections;
 
-public struct BoidEvaluationJob : IJobParallelFor {
+//public struct BoidEvaluationJob : IJobParallelFor {
+//    public NativeArray<Bird.Data> birdDatas;
+//    [ReadOnly] public NativeArray<Bird.Data> birdDatasReadOnly;
+//    [ReadOnly] public KNN.KnnContainer knn;
+//    public Unity.Mathematics.Random r;
+//
+//    public void Execute (int index) {
+//        Bird.Data data = birdDatas[index];
+//        NativeArray<int> result = new NativeArray<int>(10, Allocator.Temp);
+//        knn.QueryKNearest(data.position, result);
+//
+//        float3 evade = new float3();
+//        float3 clump = new float3();
+//        float3 align = new float3();
+//        float3 target = new float3(); 
+//
+//        float3 avgpos = new float3();
+//        float n = 0;
+//        foreach (int resultIndex in result) {
+//            Bird.Data other = birdDatasReadOnly[resultIndex];
+//            float distance = math.distance(other.position, data.position);
+//
+//            if (distance < data.visionRadius && resultIndex != data.index) { //Ignore self
+//                float w = 1.0f - (distance / data.visionRadius);
+//                avgpos += other.position;
+//                evade += (data.position - other.position) * w;
+//                align += other.velocity * w;
+//                n += 1;
+//            }
+//        }
+//        if (n > 0) {
+//            avgpos /= n;
+//            clump = avgpos - data.position;
+//            evade /= n;
+//            align /= n;
+//        }
+//        target = math.normalizesafe(-data.position);
+//
+//        data.velocity = (
+//              math.normalizesafe(data.velocity) * data.velocityFactor //That line is important, this will allow some elasticity on the speed but still tend to a normalized one
+//            + evade * data.evadeFactor
+//            + clump * data.clumpFactor
+//            + align * data.alignFactor
+//            + target * data.targetFactor) / 
+//            (data.velocityFactor + data.evadeFactor + data.clumpFactor + data.alignFactor + data.targetFactor);
+//
+//        result.Dispose();
+//
+//        birdDatas[index] = data;
+//    }
+//}
+
+
+public struct BoidEvaluationJob2D : IJobParallelFor {
     public NativeArray<Bird.Data> birdDatas;
     [ReadOnly] public NativeArray<Bird.Data> birdDatasReadOnly;
     [ReadOnly] public KNN.KnnContainer knn;
     public Unity.Mathematics.Random r;
+    public int frameId;
 
     public void Execute (int index) {
+        if (index % 3 != frameId % 3) return;
+
         Bird.Data data = birdDatas[index];
-        NativeArray<int> result = new NativeArray<int>(10, Allocator.Temp);
+        NativeArray<int> result = new NativeArray<int>(5, Allocator.Temp);
         knn.QueryKNearest(data.position, result);
 
-        float3 evade = new float3();
-        float3 clump = new float3();
-        float3 align = new float3();
-        float3 target = new float3();
+        float2 evade = new float2();
+        float2 clump = new float2();
+        float2 align = new float2();
+        float2 target = new float2(); 
 
-        float3 avgpos = new float3();
+        float2 avgpos = new float2();
         float n = 0;
         foreach (int resultIndex in result) {
             Bird.Data other = birdDatasReadOnly[resultIndex];
-            float distance = math.distance(other.position, data.position);
+            float distance = math.distance(other.position.xz, data.position.xz);
+            float w = 1.0f - (distance / data.visionRadius);
 
-            if (distance < data.visionRadius && resultIndex != data.index) { //Ignore self
-                float w = 1.0f - (distance / data.visionRadius);
-                avgpos += other.position;
-                evade += (data.position - other.position) * w;
-                align += other.velocity * w;
+            if (w > 0) { //Ignore self
+                avgpos += other.position.xz;
+                evade += (data.position.xz - other.position.xz) * w;
+                align += other.velocity.xz * w;
                 n += 1;
             }
         }
         if (n > 0) {
             avgpos /= n;
-            clump = avgpos - data.position;
-            evade /= n;
-            align /= n;
+            clump = avgpos - data.position.xz;
+            //evade /= n;
+            //align /= n;
         }
-        target = math.normalizesafe(-data.position);
+        target = math.normalizesafe(-data.position.xz);
 
-        data.velocity = (
-              math.normalizesafe(data.velocity) * data.velocityFactor //That line is important, this will allow some elasticity on the speed but still tend to a normalized one
+        float2 velocity = (
+              math.normalizesafe(data.velocity.xz) * data.velocityFactor //That line is important, this will allow some elasticity on the speed but still tend to a normalized one
             + evade * data.evadeFactor
             + clump * data.clumpFactor
             + align * data.alignFactor
@@ -52,9 +108,14 @@ public struct BoidEvaluationJob : IJobParallelFor {
             (data.velocityFactor + data.evadeFactor + data.clumpFactor + data.alignFactor + data.targetFactor);
 
         result.Dispose();
+
+        data.velocity.xz = velocity;
+        data.velocity.y = 0;
+
         birdDatas[index] = data;
     }
 }
+
 
 public class BoidController : MonoBehaviour {
     const int MAXBIRDS = 500;
@@ -130,13 +191,15 @@ public class BoidController : MonoBehaviour {
         rebuildJob.Schedule().Complete();
     }
 
+    int frameId = 0;
     // Update is called once per frame
     void Update() {
-        BoidEvaluationJob boidEvaluationJob;        
+        BoidEvaluationJob2D boidEvaluationJob;        
         boidEvaluationJob.birdDatas = new NativeArray<Bird.Data>(m_usedIndices.Count, Allocator.TempJob);
         boidEvaluationJob.birdDatasReadOnly = new NativeArray<Bird.Data>(m_usedIndices.Count, Allocator.TempJob);
         boidEvaluationJob.knn = m_knn;
         boidEvaluationJob.r = r;
+        boidEvaluationJob.frameId = frameId;
 
         for (int i = 0; i < m_usedIndices.Count; i++) {
             boidEvaluationJob.birdDatas[i] = m_birds[m_usedIndices[i]].GetComponent<Bird>().m_data;
@@ -144,9 +207,6 @@ public class BoidController : MonoBehaviour {
         }
 
         boidEvaluationJob.Schedule(boidEvaluationJob.birdDatas.Length, 1).Complete();
-        //for (int i = 0; i < 1000; i++) {
-        //    boidEvaluationJob.Execute(i);
-        //}
 
         for (int i = 0; i < m_usedIndices.Count; i++) {
             m_birds[m_usedIndices[i]].GetComponent<Bird>().m_data = boidEvaluationJob.birdDatas[i];
@@ -156,5 +216,7 @@ public class BoidController : MonoBehaviour {
         RebuildKDTree();
         boidEvaluationJob.birdDatas.Dispose();
         boidEvaluationJob.birdDatasReadOnly.Dispose();
+
+        frameId++;
     }
 }

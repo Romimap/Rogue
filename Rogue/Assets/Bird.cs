@@ -32,6 +32,7 @@ public class Bird : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         m_data.position += m_data.velocity * m_data.speed * Time.deltaTime;
+        m_data.position.y = 0;
         transform.position = m_data.position;
     }
 }
