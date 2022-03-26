@@ -10,7 +10,6 @@ public class IKBody : MonoBehaviour
     [SerializeField] float stepLenght = 2f;
     [SerializeField] float stepHeight = 1f;
     [SerializeField] float bodyHeight = 1.5f;
-    [SerializeField] Transform target;
 
     [System.Serializable]
     public struct LegList {
@@ -27,11 +26,12 @@ public class IKBody : MonoBehaviour
                 leg.Init(stepSpeed, stepForce, stepLenght, stepHeight);
             }   
         }
+        t = Random.Range(0, stepSpeed);
     }
 
     // Update is called once per frame
     void Update() {
-        Vector3 p = target.position;
+        Vector3 p = transform.position;
         float meany = 0;
         float n = 0;
          foreach(LegList group in legsGroup) {
@@ -43,8 +43,6 @@ public class IKBody : MonoBehaviour
         meany /= n;
         p.y = meany + bodyHeight;
         transform.position = p;
-        transform.rotation = target.rotation;
-
 
         t -= Time.deltaTime * stepSpeed;
 

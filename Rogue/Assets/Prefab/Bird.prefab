@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2023254912359655197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_data:
     index: 0
+    group: 0
     position:
       x: 0
       y: 0
@@ -105,9 +106,10 @@ MonoBehaviour:
       y: 0
       z: 0
     clumpFactor: 0.6
-    evadeFactor: 0.3
-    alignFactor: 0.3
+    evadeFactor: 0.2
+    alignFactor: 0.2
     targetFactor: 0.2
-    velocityFactor: 1.5
-    speed: 3
-    visionRadius: 3
+    velocityFactor: 0.5
+    otherGroupEvade: 8
+    speed: 15
+    visionRadius: 4

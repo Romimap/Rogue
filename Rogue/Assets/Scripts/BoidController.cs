@@ -64,12 +64,13 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
     [ReadOnly] public KNN.KnnContainer knn;
     public Unity.Mathematics.Random r;
     public int frameId;
+    public float2 targetPosition;
 
     public void Execute (int index) {
         if (index % 3 != frameId % 3) return;
 
         Bird.Data data = birdDatas[index];
-        NativeArray<int> result = new NativeArray<int>(5, Allocator.Temp);
+        NativeArray<int> result = new NativeArray<int>(10, Allocator.Temp);
         knn.QueryKNearest(data.position, result);
 
         float2 evade = new float2();
@@ -86,7 +87,8 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
 
             if (w > 0) { //Ignore self
                 avgpos += other.position.xz;
-                evade += (data.position.xz - other.position.xz) * w;
+                if (other.group != data.group) evade += (data.position.xz - other.position.xz) * w * data.otherGroupEvade;
+                else evade += (data.position.xz - other.position.xz) * w;
                 align += other.velocity.xz * w;
                 n += 1;
             }
@@ -97,7 +99,8 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
             //evade /= n;
             //align /= n;
         }
-        target = math.normalizesafe(-data.position.xz);
+
+        target = math.normalizesafe(targetPosition - data.position.xz);
 
         float2 velocity = (
               math.normalizesafe(data.velocity.xz) * data.velocityFactor //That line is important, this will allow some elasticity on the speed but still tend to a normalized one
@@ -118,11 +121,17 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
 
 
 public class BoidController : MonoBehaviour {
-    const int MAXBIRDS = 500;
+    const int MAXBIRDS = 2000;
 
     public static BoidController Singleton;
 
-    public GameObject m_birdPrefab;
+
+    [System.Serializable]
+    public struct Population {
+        public GameObject prefab;
+        public int Nb;
+    }
+    public List<Population> m_population;
 
     //Stores the positions of m_birds
     NativeArray<float3> m_positions;
@@ -149,8 +158,10 @@ public class BoidController : MonoBehaviour {
             m_availableIndices.Push(MAXBIRDS - i - 1);
         } 
 
-        for (int i = 0; i < MAXBIRDS; i++) {
-            AddBird(m_birdPrefab, r.NextFloat3(-20, 20));
+        for (int i = 0; i < m_population.Count; i++) {
+            for (int j = 0; j < m_population[i].Nb; j++) {
+                AddBird(m_population[i].prefab, r.NextFloat3(-20, 20));
+            }
         }
         
     }
@@ -200,6 +211,10 @@ public class BoidController : MonoBehaviour {
         boidEvaluationJob.knn = m_knn;
         boidEvaluationJob.r = r;
         boidEvaluationJob.frameId = frameId;
+        float3 target = Player.Singleton.transform.position;
+        boidEvaluationJob.targetPosition = target.xz;
+
+        Debug.DrawLine(target, target + new float3(0, 3, 0));
 
         for (int i = 0; i < m_usedIndices.Count; i++) {
             boidEvaluationJob.birdDatas[i] = m_birds[m_usedIndices[i]].GetComponent<Bird>().m_data;
@@ -220,3 +235,5 @@ public class BoidController : MonoBehaviour {
         frameId++;
     }
 }
+
+

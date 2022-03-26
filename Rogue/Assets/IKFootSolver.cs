@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 public class IKFootSolver : MonoBehaviour {
     [SerializeField] private LayerMask terrainLayer = default;
@@ -65,20 +66,12 @@ public class IKFootSolver : MonoBehaviour {
     }
 
     public void Step () {
-        RaycastHit hit;
-        if (Physics.Raycast(body.TransformPoint(footOffset), Vector3.down, out hit, 15, terrainLayer)) {
-            Vector3 offset = (deltaTargetPos / Time.deltaTime) * stepForce;
-            if (offset.magnitude > 1) offset = offset.normalized;
-            Vector3 targetPos = hit.point + stepLenght * offset;
-
-            if (Physics.Raycast(targetPos + (Vector3.up * 5), Vector3.down, out hit, 15, terrainLayer)) {
-                Debug.DrawRay(body.TransformPoint(footOffset), Vector3.down * hit.distance, Color.green);
-                oldPosition = currentPosition;
-                newPosition = hit.point;
-
-                StartCoroutine("StepAnimation");
-            }
-        }
+        oldPosition = currentPosition;
+        Vector3 delta = deltaTargetPos * stepForce;
+        if (math.lengthsq(delta) > 1) delta = math.normalize(delta);
+        newPosition = body.TransformPoint(footOffset) + (delta * stepLenght);
+        newPosition.y = Player.Singleton.m_terrain.SampleHeight(body.TransformPoint(footOffset));
+        StartCoroutine("StepAnimation");
     }
 
     private void OnDrawGizmos() {
