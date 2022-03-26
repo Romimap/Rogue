@@ -27,7 +27,6 @@ public class Bird : MonoBehaviour {
     }
 
     public Data m_data;
-    public Terrain m_terrain;
 
     private Quaternion desiredRotation;
 
@@ -40,7 +39,7 @@ public class Bird : MonoBehaviour {
     void Update() {
         m_data.position += m_data.velocity * m_data.speed * Time.deltaTime;
 
-        m_data.position.y =  m_terrain.SampleHeight(m_data.position);
+        m_data.position.y =  Player.Singleton.m_terrain.SampleHeight(m_data.position);
 
         transform.position = m_data.position;
         Transform t = transform;
