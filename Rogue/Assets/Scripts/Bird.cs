@@ -42,11 +42,11 @@ public class Bird : MonoBehaviour {
         m_data.position.y =  Player.Singleton.m_terrain.SampleHeight(m_data.position);
 
         transform.position = m_data.position;
-        Transform t = transform;
-        t.LookAt(m_data.position + m_data.velocity, Vector3.up);
-        desiredRotation = t.rotation;
+        Quaternion currentrotation = transform.rotation;
+        transform.LookAt(m_data.position + m_data.velocity, Vector3.up);
+        desiredRotation = transform.rotation;
 
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, 0.1f);
+        transform.rotation = Quaternion.Lerp(currentrotation, desiredRotation, 0.7f);
     }
 }
