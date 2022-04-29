@@ -53,6 +53,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -107,10 +108,10 @@ MonoBehaviour:
       y: 0
       z: 0
     clumpFactor: 0.6
-    evadeFactor: 0.28
+    evadeFactor: 0.3
     alignFactor: 0.2
-    targetFactor: 0.2
-    velocityFactor: 0.4
+    targetFactor: 0.3
+    velocityFactor: 20
     otherGroupEvade: 8
     speed: 13
     visionRadius: 4

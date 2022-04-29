@@ -67,7 +67,7 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
     public float2 targetPosition;
 
     public void Execute (int index) {
-        if (index % 3 != frameId % 3) return;
+        //if (index % 3 != frameId % 3) return;
 
         Bird.Data data = birdDatas[index];
         NativeArray<int> result = new NativeArray<int>(10, Allocator.Temp);
@@ -154,7 +154,7 @@ public class BoidController : MonoBehaviour {
 
         for (int i = 0; i < MAXBIRDS; i++){
             m_birds[i] = null;
-            m_positions[i] = new float3(0, 1000, 0); //NOTE: Maybe clumped points are not optimal for kdtree building
+            m_positions[i] = new float3(0, 1000, 0) + (float3)transform.position; //NOTE: Maybe clumped points are not optimal for kdtree building
             m_availableIndices.Push(MAXBIRDS - i - 1);
         } 
 
