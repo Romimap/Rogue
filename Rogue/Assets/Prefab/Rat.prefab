@@ -107,12 +107,12 @@ MonoBehaviour:
       y: 0
       z: 0
     clumpFactor: 0.6
-    evadeFactor: 0.2
+    evadeFactor: 0.28
     alignFactor: 0.2
     targetFactor: 0.2
-    velocityFactor: 0.5
+    velocityFactor: 0.4
     otherGroupEvade: 8
-    speed: 15
+    speed: 13
     visionRadius: 4
 --- !u!114 &7290521848855702236
 MonoBehaviour:
