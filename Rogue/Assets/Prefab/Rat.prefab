@@ -111,9 +111,9 @@ MonoBehaviour:
     evadeFactor: 0.3
     alignFactor: 0.2
     targetFactor: 0.3
-    velocityFactor: 20
+    velocityFactor: 6.6666665
     otherGroupEvade: 8
-    speed: 13
+    speed: 20
     visionRadius: 4
 --- !u!114 &7290521848855702236
 MonoBehaviour:

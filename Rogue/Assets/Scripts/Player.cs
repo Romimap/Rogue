@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         Vector3 myPos = transform.position;
         myPos += velocity * m_speed * Time.deltaTime;
         myPos.y =  m_terrain.SampleHeight(myPos);
-        transform.position = myPos;
+       // transform.position = myPos;
     }
 
     void FixedUpdate () {

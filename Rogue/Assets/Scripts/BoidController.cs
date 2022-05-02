@@ -67,7 +67,7 @@ public struct BoidEvaluationJob2D : IJobParallelFor {
     public float2 targetPosition;
 
     public void Execute (int index) {
-        //if (index % 3 != frameId % 3) return;
+        if (index % 3 != frameId % 3) return;
 
         Bird.Data data = birdDatas[index];
         NativeArray<int> result = new NativeArray<int>(10, Allocator.Temp);
@@ -160,7 +160,11 @@ public class BoidController : MonoBehaviour {
 
         for (int i = 0; i < m_population.Count; i++) {
             for (int j = 0; j < m_population[i].Nb; j++) {
-                AddBird(m_population[i].prefab, r.NextFloat3(-20, 20));
+                float3 p = r.NextFloat3(-20, 20);
+                if (p.x == 0) p.x = 1;
+                p = math.normalize(p);
+                p *= 100;
+                AddBird(m_population[i].prefab, p);
             }
         }
         
